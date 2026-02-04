@@ -1,56 +1,40 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Sports 2026 - Score Display</title>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sports 2026 - Live Scores</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   </head>
-  <body>
-      <header>
-          <div style="display: flex; align-items: center; flex-direction: column;">
-              <img src='https://i.postimg.cc/CKLC4LqT/Logopit-1738170631413.png' border='0' alt='Logopit-1738170631413'/>
-              <h1>SRUSHTI 2K25</h1>
-          </div>
-          <nav>
-              <!-- Add navigation links here if needed -->
-          </nav>
-      </header>
+<body>
+<img src="https://raw.githubusercontent.com/abdulkareemv/sports/main/sports.png"
+     alt="Logo"
+     class="top-banner">
+<header>
+    <h1>SPORTS 2K26</h1>
+</header>
+<!--
+<section class="carousel">
+    <div class="carousel-container">
+        <img src="https://i.postimg.cc/bwYS7VN1/artslogo-1.jpg">
+        <img src="https://i.postimg.cc/prGMpdzW/Whats-App-Image-2025-01-29-at-21-18-39-c6d3eb76.jpg">
+        <img src="https://i.postimg.cc/NFLPCk2t/Whats-App-Image-2025-01-29-at-21-18-38-d9ec25e3.jpg">
+        <img src="https://i.postimg.cc/44KD5X69/Whats-App-Image-2025-01-29-at-21-18-34-0bddd407.jpg">
+    </div>
+</section> 
+-->
 
-      <section class="carousel">
-          <div class="carousel-container">
-              <img src='https://i.postimg.cc/bwYS7VN1/artslogo-1.jpg' border='0' alt='artslogo-1'/>
-              <img src='https://i.postimg.cc/prGMpdzW/Whats-App-Image-2025-01-29-at-21-18-39-c6d3eb76.jpg' border='0' alt='Whats-App-Image-2025-01-29-at-21-18-39-c6d3eb76'/>
-              <img src='https://i.postimg.cc/NFLPCk2t/Whats-App-Image-2025-01-29-at-21-18-38-d9ec25e3.jpg' border='0' alt='Whats-App-Image-2025-01-29-at-21-18-38-d9ec25e3'/>
-              <img src='https://i.postimg.cc/44KD5X69/Whats-App-Image-2025-01-29-at-21-18-34-0bddd407.jpg' border='0' alt='Whats-App-Image-2025-01-29-at-21-18-34-0bddd407'/>
-          </div>
-      </section>
-
-      <section class="scores">
-          <h2>Live Scoreboard</h2>
-          <div class="score-container">
-              <div class="score-box red-team">
-                  <h3>Red Team</h3>
-                  <p class="score">00</p>
-              </div>
-              <div class="score-box green-team">
-                  <h3>Green Team</h3>
-                  <p class="score">00</p>
-              </div>
-              <div class="score-box blue-team">
-                  <h3>Blue Team</h3>
-                  <p class="score">00</p>
-              </div>
-              <div class="score-box yellow-team">
-                  <h3>Yellow Team</h3>
-                  <p class="score">00</p>
-              </div>
-          </div>
-      </section>
-    <h1>🏆 Live Event Results</h1>
-
+  
+<h1>🏆 Live Event Results</h1>
+<div class="score-card">
+    <div class="card red" id="redTotal">Red: 0</div>
+    <div class="card green" id="greenTotal">Green: 0</div>
+    <div class="card blue" id="blueTotal">Blue: 0</div>
+    <div class="card yellow" id="yellowTotal">Yellow: 0</div>
+</div>
 <table id="resultsTable">
     <thead>
         <tr>
@@ -64,17 +48,62 @@
     <tbody></tbody>
 </table>
 
-<div class="score-card">
-    <div class="card red" id="redTotal">Red: 0</div>
-    <div class="card green" id="greenTotal">Green: 0</div>
-    <div class="card blue" id="blueTotal">Blue: 0</div>
-    <div class="card yellow" id="yellowTotal">Yellow: 0</div>
-</div>
 
-      <footer>
-          <p>&copy; GWPTCK Sports 2026. All Rights Reserved.</p>
-          <p>Government Women's Polytechnic College Kottakkal</p>
-      </footer>
 
-  </body>
-  </html>
+<footer>
+    <p>&copy; GWPTCK Sports 2026</p>
+    <p>Government Women's Polytechnic College Kottakkal</p>
+</footer>
+
+<script>
+/* ===== CAROUSEL ===== */
+let index = 0;
+const images = document.querySelectorAll(".carousel-container img");
+
+function carousel() {
+    images.forEach((img, i) => {
+        img.style.display = i === index ? "block" : "none";
+    });
+    index = (index + 1) % images.length;
+    setTimeout(carousel, 3000);
+}
+carousel();
+
+/* ===== GOOGLE SHEET FETCH ===== */
+const sheetURL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vR3ZTB0p2mdrZYUGk2WogHSEccBPUB00xV7JZOBTw4LGy4Mv5G9E3ow6L77N5BpqH7J0XhzZEa1bAoZ/pub?gid=0&single=true&output=csv";
+
+fetch(sheetURL)
+.then(res => res.text())
+.then(data => {
+    const rows = data.trim().split("\n").slice(1);
+    let totals = { red:0, green:0, blue:0, yellow:0 };
+    const tbody = document.querySelector("#resultsTable tbody");
+
+    rows.forEach(row => {
+        const [event, r, g, b, y] = row.split(",");
+
+        totals.red += Number(r);
+        totals.green += Number(g);
+        totals.blue += Number(b);
+        totals.yellow += Number(y);
+
+        tbody.innerHTML += `
+        <tr>
+            <td>${event}</td>
+            <td>${r}</td>
+            <td>${g}</td>
+            <td>${b}</td>
+            <td>${y}</td>
+        </tr>`;
+    });
+
+    document.getElementById("redTotal").innerText = `Red: ${totals.red}`;
+    document.getElementById("greenTotal").innerText = `Green: ${totals.green}`;
+    document.getElementById("blueTotal").innerText = `Blue: ${totals.blue}`;
+    document.getElementById("yellowTotal").innerText = `Yellow: ${totals.yellow}`;
+});
+</script>
+
+</body>
+</html>
