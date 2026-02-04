@@ -69,5 +69,5 @@ document.addEventListener('DOMContentLoaded', () => {
     carousel();
     animateScoreBoxes();
     fetchScores();                 // initial load
-    setInterval(fetchScores, 60000); // auto update every 1 minute
+    setInterval(fetchScores, 30000); // auto update every 30 seconds
 });
