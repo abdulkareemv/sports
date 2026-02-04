@@ -25,11 +25,18 @@ header img {
 .top-banner {
     width: 70%;
     height: auto;
+    max-height: 300px;
     display: block;   /* removes small gaps */
   margin: 0 auto;
 }
 
-
+/* Mobile view */
+@media (max-width: 768px) {
+  .top-banner {
+    width: 90%;
+    max-height: 250px;
+  }
+}
 /* ===== HEADINGS ===== */
 h1 {
     font-family: 'Cinzel Decorative', cursive;
@@ -93,10 +100,53 @@ td {
     border-bottom: 1px solid #e5e7eb;
     font-weight: 500;
 }
-td:nth-child(2) { background: rgba(239, 68, 68, 0.08); }   /* Red */
-td:nth-child(3) { background: rgba(34, 197, 94, 0.08); }  /* Green */
-td:nth-child(4) { background: rgba(59, 130, 246, 0.08); } /* Blue */
-td:nth-child(5) { background: rgba(234, 179, 8, 0.08); }  /* Yellow */
+/* ===== INNER BORDERS ===== */
+th, td {
+  border: 1px solid #e5e7eb; /* light inner borders */
+}
+
+/* Remove outer double border look */
+table {
+  border-collapse: collapse;
+}
+
+/* Header border tweak */
+thead th {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Row separators a bit stronger */
+tbody tr td {
+  border-color: #d1d5db;
+}
+
+/* ===== HEADER COLORS MATCHING NAMES ===== */
+th:nth-child(1) {
+  background: linear-gradient(
+    90deg,
+    #ef4444,
+    #22c55e,
+    #3b82f6,
+    #eab308
+  ); /* Event = mix of all */
+}
+
+th:nth-child(2) {
+  background: linear-gradient(90deg, #dc2626, #ef4444); /* Red */
+}
+
+th:nth-child(3) {
+  background: linear-gradient(90deg, #16a34a, #22c55e); /* Green */
+}
+
+th:nth-child(4) {
+  background: linear-gradient(90deg, #2563eb, #3b82f6); /* Blue */
+}
+
+th:nth-child(5) {
+  background: linear-gradient(90deg, #ca8a04, #eab308); /* Yellow */
+}
+
 
 /* Zebra rows */
 tbody tr:nth-child(even) {
@@ -190,4 +240,27 @@ footer {
 @media (max-width: 768px) {
     h1 { font-size: 2.2rem; }
     .carousel-container { height: 250px; width: 95%; }
+}
+.event-active {
+  background: rgba(34, 197, 94, 0.15); /* soft green */
+  font-weight: 700;
+}
+.score-red {
+  background: rgba(239, 68, 68, 0.18);
+  font-weight: 700;
+}
+
+.score-green {
+  background: rgba(34, 197, 94, 0.18);
+  font-weight: 700;
+}
+
+.score-blue {
+  background: rgba(59, 130, 246, 0.18);
+  font-weight: 700;
+}
+
+.score-yellow {
+  background: rgba(234, 179, 8, 0.18);
+  font-weight: 700;
 }
