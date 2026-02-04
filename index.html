@@ -7,147 +7,6 @@
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-      <style>
-          body {
-              font-family: 'Roboto', sans-serif;
-              background: #1a1a2e;
-              color: #fff;
-              text-align: center;
-              margin: 0;
-              padding: 0;
-          }
-          header {
-              background: linear-gradient(90deg, #E94560, #FFD700);
-              padding: 20px;
-              font-family: 'Cinzel Decorative', cursive;
-              color: #fff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              flex-direction: column;
-          }
-          header img {
-              height: 60px;
-              margin-bottom: 10px;
-          }
-          nav {
-              display: flex;
-              gap: 15px;
-              margin-top: 10px;
-          }
-          nav a {
-              color: #fff;
-              text-decoration: none;
-              font-weight: bold;
-              padding: 10px 15px;
-              border-radius: 5px;
-              transition: background 0.3s;
-          }
-          nav a:hover {
-              background: rgba(255, 255, 255, 0.2);
-          }
-          h1 {
-              font-size: 3.5rem;
-              margin: 0;
-              text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-          }
-          p {
-              font-size: 1.2rem;
-              font-weight: 300;
-          }
-          .carousel {
-              margin: 20px auto;
-              width: 80%;
-              overflow: hidden;
-              border-radius: 10px;
-              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-          }
-          .carousel-container img {
-              width: 100%;
-              display: none;
-              border-radius: 10px;
-          }
-          .scores {
-              margin-top: 30px;
-          }
-          .score-container {
-              display: flex;
-              justify-content: center;
-              gap: 20px;
-              flex-wrap: wrap;
-          }
-          .score-box {
-              background: #16213e;
-              padding: 20px;
-              border-radius: 15px;
-              width: 200px;
-              box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-              transition: transform 0.3s ease, box-shadow 0.3s ease;
-          }
-          .score-box:hover {
-              transform: translateY(-10px);
-              box-shadow: 0 10px 20px rgba(255, 215, 0, 0.5);
-          }
-          .score-box h3 {
-              font-family: 'Cinzel Decorative', cursive;
-              font-size: 1.5rem;
-              margin-bottom: 10px;
-              color: #FFD700;
-          }
-          .score {
-              font-size: 2rem;
-              font-weight: bold;
-          }
-          .red-team {
-              background: rgba(233, 69, 96, 0.9);
-          }
-          .green-team {
-              background: rgba(0, 128, 0, 0.9);
-          }
-          .blue-team {
-              background: rgba(0, 102, 255, 0.9);
-          }
-          .yellow-team {
-              background: rgba(255, 215, 0, 0.9);
-          }
-          footer {
-              margin-top: 50px;
-              background: #0f3460;
-              padding: 20px;
-              color: #fff;
-              font-size: 0.9rem;
-          }
-          footer p {
-              margin: 5px 0;
-          }
-
-          /* Responsive Design */
-          @media (max-width: 768px) {
-              h1 {
-                  font-size: 2.5rem;
-              }
-              .carousel {
-                  width: 95%;
-              }
-              .score-box {
-                  width: 45%;
-                  margin-bottom: 20px;
-              }
-              nav {
-                  flex-direction: column;
-                  gap: 10px;
-              }
-          }
-
-          @media (max-width: 480px) {
-              h1 {
-                  font-size: 2rem;
-              }
-              .score-box {
-                  width: 90%;
-              }
-          }
-      </style>
   </head>
   <body>
       <header>
@@ -190,9 +49,30 @@
               </div>
           </div>
       </section>
+    <h1>🏆 Live Event Results</h1>
+
+<table id="resultsTable">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Red</th>
+            <th>Green</th>
+            <th>Blue</th>
+            <th>Yellow</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div class="score-card">
+    <div class="card red" id="redTotal">Red: 0</div>
+    <div class="card green" id="greenTotal">Green: 0</div>
+    <div class="card blue" id="blueTotal">Blue: 0</div>
+    <div class="card yellow" id="yellowTotal">Yellow: 0</div>
+</div>
 
       <footer>
-          <p>&copy; 2025 SRUSHTI 2K25. All Rights Reserved.</p>
+          <p>&copy; GWPTCK Sports 2026. All Rights Reserved.</p>
           <p>Government Women's Polytechnic College Kottakkal</p>
       </footer>
 
