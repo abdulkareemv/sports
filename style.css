@@ -264,3 +264,123 @@ footer {
   background: rgba(234, 179, 8, 0.18);
   font-weight: 700;
 }
+.result-table {
+  width: 100%;
+  max-width: 700px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: linear-gradient(135deg, #1e1e2f, #2b2b45);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  font-size: 1.05rem;
+}
+
+.result-table th {
+  padding: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.result-table td {
+  padding: 14px;
+  text-align: center;
+  color: #fff;
+}
+
+.result-table tbody tr {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.result-table tbody tr:hover {
+  transform: scale(1.02);
+  background: rgba(255,255,255,0.08);
+}
+
+/* Medal rows */
+.gold-row td {
+  color: #ffd700;
+  font-weight: 700;
+}
+
+.silver-row td {
+  color: #cfd8dc;
+  font-weight: 700;
+}
+
+.bronze-row td {
+  color: #cd7f32;
+  font-weight: 700;
+}
+
+/* Mobile friendly */
+@media (max-width: 600px) {
+  .result-table {
+    font-size: 0.95rem;
+  }
+}
+/* ===== EVENT SELECT DROPDOWN ===== */
+#eventSelect {
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto 30px;
+  display: block;
+
+  padding: 14px 18px;
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+  135deg,
+  #ff0080,
+  #7928ca,
+  #2afadf
+);
+color: #ffffff;
+
+
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+#eventSelect:hover {
+  border-color: #6c63ff;
+}
+
+#eventSelect:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.25);
+}
+
+/* Dropdown options */
+#eventSelect option {
+  background: #1e1e2f;
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Mobile tweak */
+@media (max-width: 600px) {
+  #eventSelect {
+    font-size: 1rem;
+    padding: 12px 14px;
+  }
+}
+.results-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #6c63ff, #ff0080);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
