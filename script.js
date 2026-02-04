@@ -36,3 +36,37 @@ let index = 0;
               setTimeout(carousel, 3000);
           }
           carousel();
+const sheetURL = "PASTE_YOUR_CSV_LINK_HERE";
+
+fetch(sheetURL)
+.then(res => res.text())
+.then(data => {
+    const rows = data.trim().split("\n").slice(1);
+    let totals = { red:0, green:0, blue:0, yellow:0 };
+
+    const tbody = document.querySelector("#resultsTable tbody");
+
+    rows.forEach(row => {
+        const [event, r, g, b, y] = row.split(",");
+
+        totals.red += +r;
+        totals.green += +g;
+        totals.blue += +b;
+        totals.yellow += +y;
+
+        tbody.innerHTML += `
+            <tr>
+                <td>${event}</td>
+                <td>${r}</td>
+                <td>${g}</td>
+                <td>${b}</td>
+                <td>${y}</td>
+            </tr>
+        `;
+    });
+
+    document.getElementById("redTotal").innerText = `Red: ${totals.red}`;
+    document.getElementById("greenTotal").innerText = `Green: ${totals.green}`;
+    document.getElementById("blueTotal").innerText = `Blue: ${totals.blue}`;
+    document.getElementById("yellowTotal").innerText = `Yellow: ${totals.yellow}`;
+});
