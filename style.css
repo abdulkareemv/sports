@@ -141,7 +141,7 @@ table thead tr th:last-child {
     min-height: 90px;            /* ⬅ ensures extra height */
     border-radius: 14px;
     font-weight: bold;
-    font-size: 1.1rem;           /* ⬅ slightly bigger text */
+    font-size: 1.5rem;           /* ⬅ slightly bigger text */
     color: #fff;
     min-width: 140px;
     display: flex;               /* ⬅ center text vertically */
