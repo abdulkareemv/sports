@@ -1,4 +1,4 @@
-<script>
+
 /* ===== CAROUSEL ===== */
 let index = 0;
 const images = document.querySelectorAll('.carousel-container img');
@@ -28,40 +28,46 @@ function animateScoreBoxes() {
 const sheetURL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vR3ZTB0p2mdrZYUGk2WogHSEccBPUB00xV7JZOBTw4LGy4Mv5G9E3ow6L77N5BpqH7J0XhzZEa1bAoZ/pub?gid=0&single=true&output=csv";
 
-fetch(sheetURL)
-.then(res => res.text())
-.then(data => {
-    const rows = data.trim().split("\n").slice(1);
-    let totals = { red:0, green:0, blue:0, yellow:0 };
-    const tbody = document.querySelector("#resultsTable tbody");
+function fetchScores() {
+    fetch(sheetURL)
+    .then(res => res.text())
+    .then(data => {
+        const rows = data.trim().split("\n").slice(1);
+        let totals = { red:0, green:0, blue:0, yellow:0 };
+        const tbody = document.querySelector("#resultsTable tbody");
 
-    rows.forEach(row => {
-        const [event, r, g, b, y] = row.split(",");
+        // clear old data
+        tbody.innerHTML = "";
 
-        totals.red += Number(r);
-        totals.green += Number(g);
-        totals.blue += Number(b);
-        totals.yellow += Number(y);
+        rows.forEach(row => {
+            const [event, r, g, b, y] = row.split(",");
 
-        tbody.innerHTML += `
-        <tr>
-            <td>${event}</td>
-            <td>${r}</td>
-            <td>${g}</td>
-            <td>${b}</td>
-            <td>${y}</td>
-        </tr>`;
+            totals.red += Number(r);
+            totals.green += Number(g);
+            totals.blue += Number(b);
+            totals.yellow += Number(y);
+
+            tbody.innerHTML += `
+            <tr>
+                <td>${event}</td>
+                <td>${r}</td>
+                <td>${g}</td>
+                <td>${b}</td>
+                <td>${y}</td>
+            </tr>`;
+        });
+
+        document.getElementById("redTotal").innerText = `Red: ${totals.red}`;
+        document.getElementById("greenTotal").innerText = `Green: ${totals.green}`;
+        document.getElementById("blueTotal").innerText = `Blue: ${totals.blue}`;
+        document.getElementById("yellowTotal").innerText = `Yellow: ${totals.yellow}`;
     });
-
-    document.getElementById("redTotal").innerText = `Red: ${totals.red}`;
-    document.getElementById("greenTotal").innerText = `Green: ${totals.green}`;
-    document.getElementById("blueTotal").innerText = `Blue: ${totals.blue}`;
-    document.getElementById("yellowTotal").innerText = `Yellow: ${totals.yellow}`;
-});
+}
 
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded', () => {
     carousel();
     animateScoreBoxes();
+    fetchScores();                 // initial load
+    setInterval(fetchScores, 60000); // auto update every 1 minute
 });
-</script>
