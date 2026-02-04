@@ -1,68 +1,56 @@
+<script>
+/* ===== CAROUSEL ===== */
 let index = 0;
-const carouselImages = document.querySelectorAll('.carousel-container img');
+const images = document.querySelectorAll('.carousel-container img');
 
 function carousel() {
-    carouselImages.forEach((img, i) => {
-        img.style.transform = i === index ? 'scale(1)' : 'scale(0.9)';
+    images.forEach((img, i) => {
         img.style.display = i === index ? 'block' : 'none';
     });
-    index = (index + 1) % carouselImages.length;
+    index = (index + 1) % images.length;
     setTimeout(carousel, 3000);
 }
 
-// Animate score box on load
+/* ===== SCORE BOX ANIMATION ===== */
 function animateScoreBoxes() {
-    const scoreBoxes = document.querySelectorAll('.score-box');
+    const scoreBoxes = document.querySelectorAll('.card');
     scoreBoxes.forEach((box, i) => {
+        box.style.opacity = 0;
+        box.style.transform = 'translateY(20px)';
         setTimeout(() => {
+            box.style.opacity = 1;
             box.style.transform = 'translateY(0)';
-            box.style.opacity = '1';
         }, i * 200);
     });
 }
 
-// Initialize animations
-document.addEventListener('DOMContentLoaded', () => {
-    carousel();
-    animateScoreBoxes();
-});
-
-let index = 0;
-          function carousel() {
-              const images = document.querySelectorAll('.carousel-container img');
-              images.forEach(img => img.style.display = 'none');
-              images[index].style.display = 'block';
-              index = (index + 1) % images.length;
-              setTimeout(carousel, 3000);
-          }
-          carousel();
-const sheetURL = "PASTE_YOUR_CSV_LINK_HERE";
+/* ===== GOOGLE SHEET FETCH ===== */
+const sheetURL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vR3ZTB0p2mdrZYUGk2WogHSEccBPUB00xV7JZOBTw4LGy4Mv5G9E3ow6L77N5BpqH7J0XhzZEa1bAoZ/pub?gid=0&single=true&output=csv";
 
 fetch(sheetURL)
 .then(res => res.text())
 .then(data => {
     const rows = data.trim().split("\n").slice(1);
     let totals = { red:0, green:0, blue:0, yellow:0 };
-
     const tbody = document.querySelector("#resultsTable tbody");
 
     rows.forEach(row => {
         const [event, r, g, b, y] = row.split(",");
 
-        totals.red += +r;
-        totals.green += +g;
-        totals.blue += +b;
-        totals.yellow += +y;
+        totals.red += Number(r);
+        totals.green += Number(g);
+        totals.blue += Number(b);
+        totals.yellow += Number(y);
 
         tbody.innerHTML += `
-            <tr>
-                <td>${event}</td>
-                <td>${r}</td>
-                <td>${g}</td>
-                <td>${b}</td>
-                <td>${y}</td>
-            </tr>
-        `;
+        <tr>
+            <td>${event}</td>
+            <td>${r}</td>
+            <td>${g}</td>
+            <td>${b}</td>
+            <td>${y}</td>
+        </tr>`;
     });
 
     document.getElementById("redTotal").innerText = `Red: ${totals.red}`;
@@ -70,3 +58,10 @@ fetch(sheetURL)
     document.getElementById("blueTotal").innerText = `Blue: ${totals.blue}`;
     document.getElementById("yellowTotal").innerText = `Yellow: ${totals.yellow}`;
 });
+
+/* ===== INIT ===== */
+document.addEventListener('DOMContentLoaded', () => {
+    carousel();
+    animateScoreBoxes();
+});
+</script>
