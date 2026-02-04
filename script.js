@@ -36,7 +36,6 @@ function fetchScores() {
         let totals = { red:0, green:0, blue:0, yellow:0 };
         const tbody = document.querySelector("#resultsTable tbody");
 
-        // clear old data
         tbody.innerHTML = "";
 
         rows.forEach(row => {
@@ -57,6 +56,48 @@ function fetchScores() {
             </tr>`;
         });
 
+        const tableRows = document.querySelectorAll("#resultsTable tbody tr");
+
+        tableRows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            const eventCell = cells[0];
+
+            let hasScore = false;
+
+            for (let i = 1; i < cells.length; i++) {
+                const value = Number(cells[i].textContent.trim()) || 0;
+
+                // reset column colors (important for live update)
+                cells[i].classList.remove(
+                    "score-red",
+                    "score-green",
+                    "score-blue",
+                    "score-yellow"
+                );
+
+                if (value > 0) {
+                    hasScore = true;
+
+                    // apply column color
+                    const scoreClasses = [
+                        null,
+                        "score-red",
+                        "score-green",
+                        "score-blue",
+                        "score-yellow"
+                    ];
+                    cells[i].classList.add(scoreClasses[i]);
+                }
+            }
+
+            // event highlight
+            if (hasScore) {
+                eventCell.classList.add("event-active");
+            } else {
+                eventCell.classList.remove("event-active");
+            }
+        });
+
         document.getElementById("redTotal").innerText = `Red: ${totals.red}`;
         document.getElementById("greenTotal").innerText = `Green: ${totals.green}`;
         document.getElementById("blueTotal").innerText = `Blue: ${totals.blue}`;
@@ -64,10 +105,12 @@ function fetchScores() {
     });
 }
 
+
+
 /* ===== INIT ===== */
 document.addEventListener('DOMContentLoaded', () => {
     carousel();
     animateScoreBoxes();
     fetchScores();                 // initial load
-    setInterval(fetchScores, 30000); // auto update every 30 seconds
+    setInterval(fetchScores, 10000); // auto update every 1 minute
 });
