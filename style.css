@@ -1,0 +1,132 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(180deg, #1a1a2e, #0f3460);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 1s ease-in;
+}
+
+header {
+    background: linear-gradient(90deg, #E94560, #FFD700, #0f3460);
+    padding: 20px;
+    font-family: 'Cinzel Decorative', cursive;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    animation: slideDown 1s ease-in-out;
+}
+
+h1 {
+    font-size: 4rem;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.carousel-container {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    width: 80%;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    animation: zoomIn 1.5s ease-out;
+}
+
+.carousel-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.scores {
+    margin-top: 40px;
+    animation: fadeIn 2s ease-in;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.score-box {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 20px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.score-box:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 25px rgba(255, 255, 255, 0.3);
+}
+
+.score-box h3 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #FFD700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.score {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.red-team {
+    background: radial-gradient(circle, rgba(233, 69, 96, 0.9), rgba(128, 0, 0, 0.8));
+}
+
+.green-team {
+    background: radial-gradient(circle, rgba(0, 128, 0, 0.9), rgba(0, 64, 0, 0.8));
+}
+
+.blue-team {
+    background: radial-gradient(circle, rgba(0, 102, 255, 0.9), rgba(0, 51, 102, 0.8));
+}
+
+.yellow-team {
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.9), rgba(153, 102, 0, 0.8));
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
