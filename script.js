@@ -15,13 +15,12 @@ function animateScoreBoxes() {
     const scoreBoxes = document.querySelectorAll('.card');
     scoreBoxes.forEach((box, i) => {
         box.style.opacity = 0;
-        box.style.transform = 'translateY(20px)';
         setTimeout(() => {
             box.style.opacity = 1;
-            box.style.transform = 'translateY(0)';
         }, i * 200);
     });
 }
+
 
 /* ===== GOOGLE SHEET URLs ===== */
 // Score sheet (Sheet name: Score)
@@ -94,12 +93,33 @@ function fetchScores() {
                 eventCell.classList.toggle("event-active", hasScore);
             });
 
-            document.getElementById("redTotal").innerText = `Red: ${totals.red}`;
-            document.getElementById("greenTotal").innerText = `Green: ${totals.green}`;
-            document.getElementById("blueTotal").innerText = `Blue: ${totals.blue}`;
-            document.getElementById("yellowTotal").innerText = `Yellow: ${totals.yellow}`;
+           animateNumber("redTotal", "Red", totals.red);
+animateNumber("greenTotal", "Green", totals.green);
+animateNumber("blueTotal", "Blue", totals.blue);
+animateNumber("yellowTotal", "Yellow", totals.yellow);
+
+updateRanksWithSound();
+
         });
 }
+function animateNumber(id, label, newValue) {
+    const el = document.getElementById(id);
+    const oldValue = parseInt(el.dataset.value || 0);
+    const duration = 600;
+    const startTime = performance.now();
+
+    function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(oldValue + (newValue - oldValue) * progress);
+        el.innerText = `${label}: ${value}`;
+        if (progress < 1) requestAnimationFrame(update);
+        else el.dataset.value = newValue;
+    }
+    requestAnimationFrame(update);
+}
+const rankUpSound = new Audio("rankup.mp3");
+rankUpSound.volume = 0.6;
+
 
 /* ===== FETCH RESULTS (Result sheet) ===== */
 function fetchResults() {
@@ -150,12 +170,19 @@ function fetchResults() {
                     return;
                 }
 
-                resultBox.innerHTML = `
-                  <table class="result-table">
+                const eventName = eventSelect.value;
+
+resultBox.innerHTML = `
+  <h2 class="event-winners-heading">
+    ${eventName} Winners
+  </h2>
+
+  <table class="result-table">
+
                     <thead>
                       <tr>
                         <th>Medal</th>
-                        <th>Name</th>
+                        <th>Winners</th>
                         <th>Department</th>
                       </tr>
                     </thead>
@@ -181,6 +208,38 @@ function fetchResults() {
             };
         });
 }
+let lastOrder = [];
+
+function updateRanksWithSound() {
+    const cards = [
+        document.getElementById("redTotal"),
+        document.getElementById("greenTotal"),
+        document.getElementById("blueTotal"),
+        document.getElementById("yellowTotal")
+    ];
+
+    cards.forEach(c => c.classList.remove("first","second","third","last"));
+
+    const sorted = [...cards].sort((a, b) =>
+        parseInt(b.dataset.value || 0) - parseInt(a.dataset.value || 0)
+    );
+
+    const newOrder = sorted.map(c => c.id);
+
+    if (lastOrder.length && newOrder[0] !== lastOrder[0]) {
+        rankUpSound.currentTime = 0;
+        rankUpSound.play();
+    }
+
+    sorted[0]?.classList.add("first");
+    sorted[1]?.classList.add("second");
+    sorted[2]?.classList.add("third");
+    sorted[3]?.classList.add("last");
+
+    lastOrder = newOrder;
+}
+
+ 
 
 
 /* ===== INIT ===== */
@@ -192,5 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchResults();
 
     setInterval(fetchScores, 10000);   // score auto-update
-    setInterval(fetchResults, 30000);  // result auto-update
+    setInterval(fetchResults, 10000);  // result auto-update
 });
+
