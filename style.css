@@ -11,7 +11,12 @@ body {
 
 /* ===== HEADER ===== */
 header {
-    background: linear-gradient(90deg, #E94560, #FFD700, #0f3460);
+    background: linear-gradient(135deg,
+    #ef4444,
+    #22c55e,
+    #3b82f6,
+    #eab308
+  );
     padding: 20px;
     color: #fff;
     font-family: 'Cinzel Decorative', cursive;
@@ -181,35 +186,82 @@ table thead tr th:last-child {
 .score-card {
     display: flex;
     justify-content: center;
-    gap: 18px;
+    gap: 20px;
     flex-wrap: wrap;
     margin: 40px 0;
 }
 
+/* Base card */
 .card {
-    padding: 25px 30px;          /* ⬅ more vertical padding */
-    min-height: 90px;            /* ⬅ ensures extra height */
-    border-radius: 14px;
-    font-weight: bold;
-    font-size: 1.5rem;           /* ⬅ slightly bigger text */
+    padding: 26px 34px;
+    min-height: 95px;
+    min-width: 150px;
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 1.6rem;
     color: #fff;
-    min-width: 140px;
-    display: flex;               /* ⬅ center text vertically */
+    display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+    transition: all 0.4s ease;
+    position: relative;
+    letter-spacing: 0.5px;
 }
 
+/* Hover polish */
 .card:hover {
-    transform: scale(1.12);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    transform: translateY(-6px) scale(1.08);
 }
 
-.red { background: #dc2626; }
-.green { background: #16a34a; }
-.blue { background: #2563eb; }
-.yellow { background: #ca8a04; }
+/* Team colors */
+.red { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.green { background: linear-gradient(135deg, #22c55e, #15803d); }
+.blue { background: linear-gradient(135deg, #3b82f6, #1e40af); }
+.yellow { background: linear-gradient(135deg, #facc15, #a16207); }
+
+/* 🥇 First */
+.first {
+    box-shadow: 0 0 35px rgba(255,215,0,0.9);
+    transform: scale(1.05);
+}
+.first::after {
+    content: "👑";
+    position: absolute;
+    top: -22px;
+    font-size: 1.8rem;
+    animation: pulse 1.6s infinite;
+}
+
+/* 🥈 Second */
+.second {
+    box-shadow: 0 0 25px rgba(220,220,220,0.8);
+}
+
+/* 🥉 Third */
+.third {
+    box-shadow: 0 0 20px rgba(205,127,50,0.7);
+}
+
+/* 4️⃣ Last */
+.last {
+    opacity: 0.65;
+    filter: grayscale(20%);
+}
+
+/* ===== RANK ORDER (POSITIONING) ===== */
+.first  { order: 1; }
+.second { order: 2; }
+.third  { order: 3; }
+.last   { order: 4; }
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
 
 /* ===== FOOTER ===== */
 footer {
@@ -298,21 +350,67 @@ footer {
   transform: scale(1.02);
   background: rgba(255,255,255,0.08);
 }
+/* 🥇 Gold row background */
+.gold-row {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.18),
+    rgba(255, 215, 0, 0.05)
+  );
+}
+
+/* 🥈 Silver row background */
+.silver-row {
+  background: linear-gradient(
+    90deg,
+    rgba(207, 216, 220, 0.18),
+    rgba(207, 216, 220, 0.05)
+  );
+}
+
+/* 🥉 Bronze row background */
+.bronze-row {
+  background: linear-gradient(
+    90deg,
+    rgba(205, 127, 50, 0.18),
+    rgba(205, 127, 50, 0.05)
+  );
+}
 
 /* Medal rows */
 .gold-row td {
   color: #ffd700;
   font-weight: 700;
+   background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.18),
+    rgba(255, 215, 0, 0.05)
+  );
 }
 
 .silver-row td {
   color: #cfd8dc;
   font-weight: 700;
+  background: linear-gradient(
+    90deg,
+    rgba(207, 216, 220, 0.18),
+    rgba(207, 216, 220, 0.05)
+  );
 }
 
 .bronze-row td {
   color: #cd7f32;
+background: linear-gradient(
+    90deg,
+    rgba(205, 127, 50, 0.18),
+    rgba(205, 127, 50, 0.05)
+  );
   font-weight: 700;
+}
+.result-table td:nth-child(2),
+.result-table td:nth-child(3) {
+    font-weight: 600;
+    transition: color 0.3s ease;
 }
 
 /* Mobile friendly */
